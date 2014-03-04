@@ -9,7 +9,8 @@ TODO:
 */
 
 function tplOrHtml(arg, tplContext) {
-	return Template[arg] || Template['modal-bs3ui-html'].withData({html: arg});
+	return Template[arg] ||
+		Template['modal-bs3ui-html'].extend({data: { html: HTML.Raw(arg) }});
 }
 
 modal = function(data) {
@@ -33,7 +34,7 @@ modal = function(data) {
 
 	var modalEl = $('#' + context.id);
 	if (!modalEl.length) {
-		UI.insert(UI.render(tpl.withData(context)), document.body);
+		UI.DomRange.insert(UI.render(tpl.extend({data: context})).dom, document.body);
 		modalEl = $('#' + context.id);
 		modalEl.on('hidden.bs.modal', function() {
 			Session.set('modalData', null);
