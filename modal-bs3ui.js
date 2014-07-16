@@ -22,12 +22,15 @@ modal = function(data) {
 	}
 
 	data = $.extend({}, {
-		body: 'Call with {body: Template || "text"}'
+		title: 'Call with {title: Template || "text"}',
+		body: 'Call with {body: Template || "text"}',
+		showFooter: true
 	}, data);
 
 	var context = $.extend({}, data.context || {}, {
 		id: data.id || 'modal-bs3ui',
-		title: data.title || 'Call with {title: Template || "text"}',
+		title: data.title,
+		showFooter: data.showFooter,
 		body: tplOrHtml(data.body),
 		tabindex: data.tabindex === false ? '' : data.tabindex || '-1'
 	});
